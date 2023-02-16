@@ -41,13 +41,6 @@ const App = () => {
       url = "error"
     }
 
-    if (loading) {
-      return (
-        <>
-          Loading
-        </>
-      )
-    }
     return (
       <div className="card item" key={index}>
         <img src={url} className="card-img-top" alt={url} />
@@ -71,8 +64,8 @@ const App = () => {
 
   return (
     <>
-      <form className='m-4 text-center' >
-        <input type="text" name="query" id="query" value={query} className='py-2 m-5 rounded-4' onChange={handleChange} placeholder='Search' />
+      <form className='m-4 m-md-4 text-center' >
+        <input type="text" name="query" id="query" value={query} className='py-2 my-5 mx-2 mx-md-5 rounded-4' onChange={handleChange} placeholder='Search' />
         <button className='btn btn-primary' onClick={handleClick}>Go</button>
       </form>
       <div className="layout">
