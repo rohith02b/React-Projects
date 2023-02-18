@@ -1,76 +1,22 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './App.css'
-import axios from 'axios'
-
+import Navbar from './components/Navbar'
+import { Route, Routes, useNavigate } from 'react-router-dom'
+import Search from './components/Search'
+import Home from './components/Home'
 
 const App = () => {
 
-  const [movies, setMovies] = useState([])
-  const [query, setQuery] = useState("")
-  const [loading, setLoading] = useState(true)
 
-  const options = {
-    method: 'GET',
-    url: 'https://online-movie-database.p.rapidapi.com/title/find',
-    params: { q: query },
-    headers: {
-      'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_KEY,
-      'X-RapidAPI-Host': 'online-movie-database.p.rapidapi.com'
-    }
-  };
-
-
-  const fetchData = async () => {
-    await axios.request(options).then(function (response) {
-      console.log(response.data)
-      setMovies(response.data.results)
-      setLoading(false)
-    }).catch(function (error) {
-      console.error(error);
-    });
-  }
-
-
-  const movie = movies.map((each, index) => {
-
-    let url = ''
-    try {
-      url = each.image.url
-    }
-    catch (err) {
-      url = "error"
-    }
-
-    return (
-      <div className="card item" key={index}>
-        <img src={url} className="card-img-top" alt={url} />
-        <div className="card-body">
-          <h5 className="card-title text-center">{each.titleType}</h5>
-          <p className="card-text text-center">{each.title}</p>
-        </div>
-      </div>
-    )
-  })
-
-  const handleChange = (e) => {
-    setQuery(e.target.value)
-  }
-
-  const handleClick = (e) => {
-    e.preventDefault()
-    fetchData()
-    setQuery('')
-  }
+  const [search, setSearch] = useState("")
 
   return (
     <>
-      <form className='m-4 m-md-4 text-center' >
-        <input type="text" name="query" id="query" value={query} className='py-2 my-5 mx-2 mx-md-5 rounded-4' onChange={handleChange} placeholder='Search' />
-        <button className='btn btn-primary' onClick={handleClick}>Go</button>
-      </form>
-      <div className="layout">
-        {movie}
-      </div>
+      <Navbar keyword={search} method={setSearch} />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/search' element={<Search keyword={search} />} />
+      </Routes>
     </>
   )
 }

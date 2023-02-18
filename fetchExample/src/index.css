@@ -1,37 +1,45 @@
+body{
+  background-color: aliceblue;
+}
+
+
 .layout{
   display: grid;
   gap: 5vh 5vh;
   grid-template-columns: auto auto auto auto;
 }
 
- /* .item {
-  width: 100%;
-  height: auto;
-} */
+
+.home{
+  margin-top: 15vh;
+  margin-bottom: 8vh;
+}
+
+.link{
+  text-decoration: none;
+}
 
 @media only screen and (max-width: 1200px) {
- .layout{
+.layout{
   display: grid;
   gap: 5vh 5vh;
   grid-template-columns: auto auto auto;
 }
 
- .item {
-  width: 100%;
-  height: auto;
-}
 }
 
 
 @media only screen and (max-width: 600px) {
- .layout{
+
+.home{
+  margin-top: 18vh;
+  margin-bottom: 8vh;
+}
+
+.layout{
   display: grid;
   gap: 5vh 5vh;
   grid-template-columns: auto auto;
 }
 
- .item {
-  width: 100%;
-  height: auto;
-}
 }
